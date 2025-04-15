@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- Tree View -->
+    <record model="ir.ui.view" id="view_hotel_guests_list">
+        <field name="name">Hotel Guests List</field>
+        <field name="model">hotel.guests</field>
+        <field name="arch" type="xml">
+
+            <tree>
+                <field name="name"/>
+                <field name="contactno"/>
+                <field name="email"/>
+                <field name="address_city"/>
+                <field name="address_province"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Form View -->
+    <record model="ir.ui.view" id="view_hotel_guests_form">
+        <field name="name">Hotel Guests Form</field>
+        <field name="model">hotel.guests</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group string="Basic Information">
+                        <field name="lastname"/>
+                        <field name="firstname"/>
+                        <field name="middlename"/>
+                        <field name="contactno"/>
+                        <field name="email"/>
+                    </group>
+                    <group string="Address">
+                        <field name="address_streetno"/>
+                        <field name="address_area"/>
+                        <field name="address_city"/>
+                        <field name="address_province"/>
+                        <field name="zipcode"/>
+                    </group>
+                    <group string="Additional Info">
+                        <field name="gender"/>
+                        <field name="birthdate"/>
+                        <field name="age" readonly="1"/>
+                        <field name="photo" widget="image"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Action -->
+    <record model="ir.actions.act_window" id="action_hotel_guests">
+        <field name="name">Hotel Guests</field>
+        <field name="res_model">hotel.guests</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <!-- Menu Item -->
+    <menuitem
+        name="Guests"
+        id="menu_hotel_guests"
+        parent="menu_hotel_masterlists"
+        action="action_hotel_guests"
+        sequence="5"
+    />
+</odoo>
