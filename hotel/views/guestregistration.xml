@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- ======================== LINE VIEW ======================== -->
+    
+    <record id="view_hotel_guestregistration_list" model="ir.ui.view">
+        <field name="name">hotel.guestregistration.list</field>
+        <field name="model">hotel.guestregistration</field>
+        <field name="arch" type="xml">
+            <list string="Guest Registrations">
+                <field name="guest_name"/>
+                <field name="room_id"/>
+                <field name="checkin_date"/>
+                <field name="checkout_date"/>
+                <field name="stay_duration"/>
+                <field name="state"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- ======================== FORM VIEW ======================== -->
+    <record id="view_hotel_guestregistration_form" model="ir.ui.view">
+        <field name="name">hotel.guestregistration.form</field>
+        <field name="model">hotel.guestregistration</field>
+        <field name="arch" type="xml">
+            <form string="Guest Registration Form">
+                <sheet>
+                    <group>
+                        <!-- ⚫ Guest Selection and Room Assignment -->
+                        <field name="guest_id"
+                               options="{'readonly': [('state', '!=', 'reserved')]}"/>
+                        <field name="room_id"
+                               options="{'readonly': [('state', '!=', 'reserved')]}"/>
+                    </group>
+                    <group>
+                        <!-- ⚫ Dates and Duration -->
+                        <field name="checkin_date"
+                               options="{'readonly': [('state', '!=', 'reserved')]}"/>
+                        <field name="checkout_date"
+                               options="{'readonly': [('state', '!=', 'reserved')]}"/>
+                        <field name="stay_duration" readonly="1"/>
+                        <field name="state" readonly="1"/>
+                    </group>
+
+                    <!-- ======================== FOOTER BUTTONS ======================== -->
+                    <footer>
+                        <!-- Reserve Button -->
+                        <button name="action_reserve"
+                                string="Reserve"
+                                type="object"
+                                class="btn-primary"
+                                groups="base.group_user"/>
+
+                        <!-- Check-In Button -->
+                        <button name="action_checkin"
+                                string="Check In"
+                                type="object"
+                                class="btn-success"
+                                groups="base.group_user"/>
+
+                        <!-- Check-Out Button -->
+                        <button name="action_checkout"
+                                string="Check Out"
+                                type="object"
+                                class="btn-secondary"
+                                groups="base.group_user"/>
+
+                        <!-- Cancel Button -->
+                        <button name="action_cancel"
+                                string="Cancel"
+                                type="object"
+                                class="btn-danger"
+                                groups="base.group_user"/>
+                    </footer>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- ======================== WINDOW ACTION ======================== -->
+    <record id="action_hotel_guestregistration" model="ir.actions.act_window">
+        <field name="name">Guest Registration</field>
+        <field name="res_model">hotel.guestregistration</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Register guests and assign them to rooms. Make sure dates do not overlap with existing bookings.
+            </p>
+        </field>
+    </record>
+
+    <!-- ======================== MENU ITEM ======================== -->
+    <menuitem id="menu_hotel_guestregistration"
+              name="Guest Registration"
+              parent="menu_hotel_root"
+              action="action_hotel_guestregistration"
+              sequence="10"/>
+
+</odoo>

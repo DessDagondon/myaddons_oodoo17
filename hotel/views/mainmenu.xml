@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- Top menu item -->
+    <menuitem name="Hotel" id="menu_hotel_root"  web_icon ="hotel,static/description/hotelicon.png"/>
+
+    <!-- Menu categories -->
+    <menuitem name="Guest Registration" id="menu_hotel_guestregistration" parent="menu_hotel_root"/>
+    <menuitem name="Master Lists" id="menu_hotel_masterlists" parent="menu_hotel_root"/>
+
+</odoo>
