@@ -1,0 +1,22 @@
+CREATE OR REPLACE FUNCTION check_room_schedule_conflict(
+    room_id_input room_id_input
+    date_from_input DATE,
+    date_to_input DATE
+)
+
+RETURNS BOOLEAN AS
+SS
+BEGIN
+
+-- Query to check for room schedule conflict
+RETURN EXISTS (
+   SELECT 1
+   FROM hotel_guestregistration
+   WHERE room_id = room_id_input
+   AND state IN ("RESERVED' 'CHECKED IN')
+   AND "datefromSched" <= date_to_input
+   AND "datetoSched" >= date_from_input
+
+      );
+   END;
+   SS LANGUAGE plpgsql;
